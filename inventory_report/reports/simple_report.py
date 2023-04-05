@@ -32,10 +32,13 @@ class SimpleReport:
 
     @staticmethod
     def generate(inventory: list[dict]) -> dict:
-        manufacturing_date = SimpleReport.oldest_manufacturing_date(inventory)
-        expiration_date = SimpleReport.closest_expiration_date(inventory)
-        company = SimpleReport.company_with_more_products(inventory)
+        oldest_date = SimpleReport.oldest_manufacturing_date(
+            inventory)
+        closest_date = SimpleReport.closest_expiration_date(
+            inventory)
+        company_bigger_stock = SimpleReport.company_with_more_products(
+            inventory)
 
-        return f"Data de fabricação mais antiga: {manufacturing_date}\n" \
-               f"Data de validade mais próxima: {expiration_date}\n" \
-               f"Empresa com mais produtos: {company}\n"
+        return f"{oldest_date}\n" \
+               f"{closest_date}\n" \
+               f"{company_bigger_stock}"
