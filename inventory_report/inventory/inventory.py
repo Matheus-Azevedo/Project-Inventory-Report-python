@@ -44,7 +44,7 @@ class Inventory():
         return inventory
 
     @staticmethod
-    def generate_report(inventory: list[dict], type: str) -> str:
+    def generate_report(inventory: list[dict], type: str) -> list[dict]:
         if type == "simples":
             return SimpleReport.generate(inventory)
         elif type == "completo":
