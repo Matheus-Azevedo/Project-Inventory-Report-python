@@ -18,13 +18,7 @@ class Inventory():
             inventory = Inventory.import_xml(file_path)
         else:
             raise ValueError("Arquivo inválido")
-
-        if type == "simples":
-            return SimpleReport.generate(inventory)
-        elif type == "completo":
-            return CompleteReport.generate(inventory)
-        else:
-            raise ValueError("Tipo inválido")
+        return Inventory.generate_report(inventory, type)
 
     @staticmethod
     def import_csv(path: str) -> list[dict]:
@@ -42,3 +36,12 @@ class Inventory():
         with open(path, "r") as file:
             root = ET.parse(file).getroot()
             return [dict(child.attrib) for child in root]
+
+    @staticmethod
+    def generate_report(inventory: list[dict], type: str) -> str:
+        if type == "simples":
+            return SimpleReport.generate(inventory)
+        elif type == "completo":
+            return CompleteReport.generate(inventory)
+        else:
+            raise ValueError("Tipo inválido")
