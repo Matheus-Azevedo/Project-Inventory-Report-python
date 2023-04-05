@@ -33,9 +33,15 @@ class Inventory():
 
     @staticmethod
     def import_xml(path: str) -> list[dict]:
-        with open(path, "r") as file:
-            root = ET.parse(file).getroot()
-            return [dict(child.attrib) for child in root]
+        tree = ET.parse(path)
+        root = tree.getroot()
+        inventory = []
+        for child in root:
+            product = {}
+            for subchild in child:
+                product[subchild.tag] = subchild.text
+            inventory.append(product)
+        return inventory
 
     @staticmethod
     def generate_report(inventory: list[dict], type: str) -> str:
